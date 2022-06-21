@@ -1,0 +1,383 @@
+:root{
+    --primary-color:#d1bdb0;
+    --second-color:rgb(107, 99, 95);
+    --third-color:#e6e6e6;
+    --fourth-color:#333333;
+    --fifth-color:rgba(51, 51, 51, .5);
+    --fifth-color-dark:rgba(51, 51, 51, .8);
+
+    --primary-text-font:"EllenLuff-Aventa-Light";
+    --secondary-text-font:"EllenLuff-Aventa-Light-Itallic";
+}
+
+
+@font-face {
+    font-family: "EllenLuff-Aventa-Light";
+    src: local('EllenLuff-Aventa-Light'), url("../font/EllenLuff-Aventa-Light.otf");
+}
+@font-face {
+    font-family: "EllenLuff-Aventa-Light-Itallic";
+    src: local('EllenLuff-Aventa-Light-Itallic'), url("../font/EllenLuff-Aventa-Light-Itallic.otf");
+}
+
+@media not all and (max-width: 910px) {
+    .nav-button {
+        display: none;
+    }
+    #menu-logo{
+        display: none;
+    }
+
+}
+
+@media not all and (min-width:920px){
+    #logo{
+        display: none;
+    }
+    #logo img{
+        display: none;
+    }
+}
+
+body{
+    background-image: url("../storage/assets/Cafe-pequeno-solucoes-criativas-fundo-site.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+header{
+    font-family: var(--primary-text-font);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 7.5rem;
+    background: rgba(0, 0, 0, .3);
+    position: relative;
+    top: -.5rem;
+}
+.nav-button{
+    height: 2rem;
+    width: 20%;
+    z-index: 100;
+    border: none;
+    padding: 0;
+    margin: .5rem 0;
+    background:transparent;
+    color: var(--third-color);
+    font-size: 2rem;
+}
+
+#logo{
+    height: 80px;
+    width: 25%;
+    top: .1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#logo a img{
+    height: 4rem;
+}
+
+#titulo-marca{
+    position: absolute;
+    height: 8rem;
+    width: 100%;
+    align-self: center;
+}
+#titulo-marca img{
+    width: 10rem;
+    left: 50%;
+    top:30%;
+    transform: translateX(-50%);
+    position: absolute;
+}
+
+.nav-menu{
+    position: fixed;
+    top: 0;
+    left: -70%;
+    width: 70%;
+    max-width: 25rem;
+    height: 100%;
+    background: rgba(0, 0, 0, .95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: ease-out .4s;
+    z-index: 99;
+    padding: 4rem 0;
+}
+.nav-menu.open{
+    left: 0;
+}
+
+#menu-logo{
+    height: 4rem;
+    width: 4rem;
+    margin-bottom: 3rem;
+}
+#menu-logo img{
+    height: 4rem;
+    width: 4rem;
+}
+
+.nav-menu ul{
+    width: 100%;
+    height: 48%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: .5rem;
+    position: relative;
+
+}
+.nav-menu ul li{
+    height: 3.5rem;
+    margin: .5rem .3rem;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing:2px;
+    border-bottom: 1px solid var(--primary-color);
+    position: relative;
+    bottom: .5rem;
+}
+
+.nav-menu ul li a{
+    text-decoration: none;
+    color: var(--third-color);
+}
+
+.nav-menu ul li a i{
+    font-size: 1.05rem;
+    font-style:normal;
+}
+
+.main-footer{
+    font-family: var(--primary-text-font);
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative;
+    top: 1.75rem;
+}
+
+.footer-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-form form{
+    display: flex;
+    flex-direction: column;
+}
+.footer-form form label{
+    padding: 0 1rem;
+    margin: .5rem 0;
+}
+
+.mensagem-envio{
+    width: 95vw;
+    max-width: 455px;
+}
+
+.footer-form form input,
+.footer-form form textarea{
+    width: 95vw;
+    max-width: 455px;
+    padding: .5rem;
+    margin: .2rem;
+    background-color: var(--primary-color);
+    border: 1px solid var(--fourth-color);
+}
+.footer-form form input:focus,
+.footer-form form textarea:focus{
+    background-color: var(--third-color);
+}
+.footer-form form input::placeholder,
+.footer-form form textarea::placeholder{
+    color: var(--fourth-color);
+}
+
+.footer-form form button{
+    width: 85%;
+    height: 2.5rem;
+    max-width: 15rem;
+    margin: 1rem;
+    border: none;
+    font-weight: bold;
+    background: var(--fifth-color);
+    color: var(--third-color);
+    align-self: center;
+}
+.footer-form form button:hover{
+    background: var(--fifth-color-dark);
+}
+
+.footer-social-info{
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+}
+.footer-social-media{
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin: 1rem 0;
+}
+.footer-social-media i{
+    margin: 0 1rem;
+    text-decoration: none;
+    color: var(--fourth-color);
+}
+.footer-social-media a{
+    text-decoration: none;
+}
+.footer-adress p{
+    padding: 0 1rem;
+    text-align: center;
+}
+
+
+
+
+.principal{
+    min-height: 55vh;
+}
+.admin-principal{
+    min-height: 90vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(min-width: 550px){
+    .footer-form form button{
+        align-self: flex-start;
+    }
+}
+
+@media (min-width: 920px){
+    body{
+        background-size: 100%;
+    }
+    header{
+        padding: 0 15rem;
+        background: transparent;
+        background: linear-gradient(90deg, transparent 5%, rgba(0, 0, 0, .5) 25%, rgba(0, 0, 0, .5) 75%, transparent 95%);
+    }
+    #logo{
+        width: 10%;
+        height: 7rem;
+    }
+    #logo img{
+        height: 75%;
+    }
+    .nav-menu{
+        position: relative;
+        left: 0;
+        width: 80%;
+        height: 100%;
+        flex-direction: row;
+        background: transparent;
+    }
+    .nav-menu ul{
+        position: relative;
+        width: 100%;
+        height: 6rem;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        top: 1rem;
+    }
+    .nav-menu ul li{
+        border: none;
+        margin-left: .5rem;
+
+    }
+    .nav-menu ul li:hover{
+        border-bottom: solid 5px var(--primary-color);
+    }
+    #titulo-marca{
+        position: relative;
+        width: 20%;
+        display: flex
+    }
+    #titulo-marca img{
+        width: 90%;
+    }
+
+    .main-footer{
+        flex-direction: row;
+        align-items: center;
+        height: 60vh;
+    }
+    .footer-content{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .footer-form{
+        margin-left: 5rem;
+    }
+    .footer-form form label{
+        line-height: .7rem;
+    }
+    .footer-form form input{
+        height: 1.5rem;
+    }
+
+    .footer-form form textarea{
+        height: 11.5rem;
+    }
+
+
+}
+
+@media (min-width: 1400px){
+    #logo{
+        height: 8rem;
+    }
+    #logo a img{
+        height:5.5rem;
+    }
+
+    #titulo-marca img{
+        width: 60%;
+    }
+    .footer-adress p{
+        font-size: 1.1rem;
+    }
+
+    .footer-form form button{
+        align-self: center;
+    }
+}

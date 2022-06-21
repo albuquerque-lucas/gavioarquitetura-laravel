@@ -1,0 +1,132 @@
+.display-projeto{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family:var(--primary-text-font);
+}
+
+.project-main-image,
+.project-image-list{
+    width: 100%;
+}
+.project-main-image{
+    display: flex;
+    justify-content: center;
+}
+.project-main-image img{
+    width: 99%;
+    margin: 1rem 0;
+}
+
+.project-image-list img{
+    width: 99%;
+    max-width: 890px;
+    transition: .2s ease-out;
+    margin-bottom: .5rem;
+}
+
+.project-image-list img:hover{
+    transform: scale(1.05);
+}
+
+.title-content{
+    max-width: 98%;
+    margin: 2rem 0;
+}
+.title-content h1{
+    font-size: 2.8rem;
+    text-align: justify;
+}
+
+.info-project{
+    margin: 2.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-data{
+    margin: 1rem 0;
+    width: 90%;
+    max-width: 340px;
+}
+
+.info-data h3{
+    background: var(--fourth-color);
+    color: var(--third-color);
+    padding: .5rem;
+}
+.info-data table{
+    width: 99%;
+}
+.info-data table tr{
+    border-bottom: 1px solid var(--fourth-color);
+}
+.info-data table tr td i{
+    font-weight: bold;
+}
+.project-description{
+    max-width: 550px;
+    margin: 3rem 0;
+}
+
+.project-description p{
+    padding: .5rem 1rem;
+    text-align: justify;
+}
+
+.project-image-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem 0 10rem 0;
+}
+
+.project-image-list img{
+    margin: .5rem 0;
+}
+
+@media(min-width:650px){
+    .info-project{
+        flex-direction: row;
+    }
+    .info-data, .project-description{
+        width: 50%;
+        padding: 0 .1rem;
+    }
+}
+
+@media(min-width:950px){
+    .info-project{
+        justify-content: space-between;
+        width: 80%;
+    }
+}
+
+@media(min-width:1300px){
+    .project-main-image img{
+        width: 95%;
+        max-height: 600px;
+        object-fit: cover;
+    }
+    .title-content h1{
+        font-size: 4.5rem;
+    }
+    .info-project{
+        width:65%;
+    }
+    
+    .project-description p{
+        font-size: 1.2rem;
+    }
+    .info-data{
+        font-size: 125%;
+        max-width: 440px;
+    }
+
+    .project-image-list img{
+        max-width: 1000px;
+    }
+}
+

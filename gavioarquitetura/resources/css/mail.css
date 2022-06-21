@@ -1,0 +1,117 @@
+
+.form-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--primary-text-font);
+
+}
+.form-section p{
+    margin: 5rem 0 2rem;
+    font-size: 1.1rem;
+}
+
+.form-section form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form-mensagem-envio{
+    width: 95vw;
+    max-width: 555px;
+    text-align: center;
+}
+
+.form-section form input,
+.form-section form textarea{
+    width: 95%;
+    max-width: 555px;
+    margin: .5rem .2rem;
+    padding: .5rem;
+    background-color: var(--primary-color);
+    border: 1px solid var(--fourth-color);
+}
+.form-section form input:focus,
+.form-section form textarea:focus{
+    background: var(--third-color);
+}
+.form-section form input::placeholder,
+.form-section form textarea::placeholder{
+    color: var(--fourth-color);
+}
+.form-section form input{
+    height: 2rem;
+}
+.form-section form textarea{
+    min-height: 10rem;
+    margin-bottom: 2rem;
+}
+
+.form-section form button{
+    height: 2.5rem;
+    width: 95%;
+    max-width: 546px;
+    border: none;
+    font-weight: bold;
+    background: var(--fifth-color);
+    color: var(--third-color);
+}
+.form-section form button:hover{
+    background: var(--fifth-color-dark);
+}
+
+
+
+
+.contact-footer{
+    justify-content: center;
+    align-items: flex-start;
+    height: 30vh;
+}
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 584px){
+    .form-section form button{
+        margin-top: 1rem;
+        width: 15rem;
+    }
+    
+}
+
+@media (min-width: 920px){
+    .form-section{
+        margin-top: 2rem;
+    }
+    .form-section p{
+        font-size: 1.3rem;
+        margin-bottom: 3rem;
+    }
+
+    .form-section form input,
+    .form-section form textarea{
+        margin:.5rem;
+    }
+}
+
+@media (min-width: 1360px){
+    .form-section p{
+        font-size: 1.4rem;
+    }
+    .form-section form input,
+    .form-section form textarea{
+        margin:.5rem;
+        max-width: 45rem;
+        height: 3rem;
+    }
+}
