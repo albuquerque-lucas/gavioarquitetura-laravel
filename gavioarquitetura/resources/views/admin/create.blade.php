@@ -8,30 +8,30 @@
             </ul>
         </div>
     @endif
-    <form method="post" enctype="multipart/form-data" action="{{route('admin_projetos.store')}}">
+    <form method="post" enctype="multipart/form-data" action="{{route('admin_projects.store')}}">
         @csrf
         <div class="form-group mb-4 w-50">
             <label for="carrossel">Carrossel</label>
-            <select name="carrossel" id="carrossel" class="form-control border-secondary">
+            <select name="activate_carousel" id="activate_carousel" class="form-control border-secondary">
                 <option value="true">Ativado</option>
-                <option value="0">Desativado</option>
+                <option value="false">Desativado</option>
             </select>
             <label for="categoria">Categoria</label>
-            <select name="categoriaId" id="categoriaId" class="form-control border-secondary">
-                @foreach($categorias as $categoria)
-                    <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
+            <select name="category_id" id="category_id" class="form-control border-secondary">
+                @foreach($categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
             </select>
             <label for="nome">Nome</label>
-            <input type="text" class="form-control border-secondary" name="nome" id="nome">
+            <input type="text" class="form-control border-secondary" name="name" id="name">
             <label for="area">Área</label>
             <input type="text" class="form-control border-secondary" name="area" id="area">
             <label for="ano">Ano</label>
-            <input type="text" class="form-control border-secondary" name="ano" id="ano">
+            <input type="text" class="form-control border-secondary" name="year" id="year">
             <label for="localizacao">Localização</label>
-            <input type="text" class="form-control border-secondary" name="localizacao" id="localizacao">
+            <input type="text" class="form-control border-secondary" name="address" id="address">
             <label for="descricao">Descrição</label>
-            <textarea name="descricao" id="descricao" class="form-control border-secondary"></textarea>
+            <textarea name="description" id="description" class="form-control border-secondary"></textarea>
             <label for="img_path">Imagem</label>
             <input type="file" class="form-control border-secondary" name="img_path" id="img_path">
 

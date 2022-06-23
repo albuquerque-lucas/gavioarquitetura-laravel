@@ -24,38 +24,46 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $name = 'Projetos';
-        $projetos = Project::query()->orderBy('id')->get();
+        $projects = Project::query()->orderBy('id')->get();
         $categories = Category::query()->orderBy('id')->get();
-        $mensagem = $request->session()->get('mensagem');
-        return view('admin.index', compact('projetos', 'mensagem', 'categories', 'name'));
+        $message = $request->session()->get('message');
+        return view('admin.index', compact('projects', 'message', 'categories', 'name'));
 
     }
 
     public function categoryIndex(Request $request)
     {
         $id = $request->id;
-        $nome = $request->nome;
-        $projetos = Project::query()->where('categoria_id', $id)->get();
-        $categorias = Category::query()->orderBy('id')->get();
-        $mensagem = $request->session()->get('mensagem');
-        return view('admin.index', compact('projetos', 'categorias', 'mensagem', 'nome'));
+        $name = $request->name;
+        $projects = Project::query()->where('category_id', $id)->get();
+        $categories = Category::query()->orderBy('id')->get();
+        $message = $request->session()->get('mensagem');
+        return view('admin.index', compact('projects', 'categories', 'message', 'name'));
     }
 
 
     public function create()
     {
-        $categorias = Category::query()->orderBy('id')->get();
-        return view('admin.create', compact('categorias'));
+        $categories = Category::query()->orderBy('id')->get();
+        return view('admin.create', compact('categories'));
     }
 
     public function store(ProjectFormRequest $request, ProjectCreator $projectCreator)
     {
 
         $image = $projectCreator->coverUpload($request);
-        $projeto = $projectCreator->createProject($request->name, $request->area, $request->year, $request->address, $request->description, $image, $request->categoryId, $request->carousel);
+        $project = $projectCreator->createProject(
+            $request->name,
+            $request->area,
+            $request->year,
+            $request->address,
+            $request->description,
+            $image,
+            $request->category_id,
+            $request->activate_carousel);
 
-        $request->session()->flash('mensagem', "Projeto $project {$projeto->nome} adicionado com sucesso.");
-        return redirect()->route('admin_projetos.index');
+        $request->session()->flash('message', "Projeto $project->name adicionado com sucesso.");
+        return redirect()->route('admin_projects.index');
 
     }
 
@@ -68,7 +76,14 @@ class ProjectController extends Controller
 
     }
 
-    public function editaCampoNome(Request $request)
+    public function show(int $project_id)
+    {
+        $project = Project::find($project_id);
+        $images = Image::query()->orderBy('id')->where('project_id', $project_id)->get();
+        return view('admin.show', compact('project', 'images'));
+    }
+
+    public function editName(Request $request)
     {
         $novoNome = $request->nome;
         $project = Project::find($request->id);
@@ -76,7 +91,7 @@ class ProjectController extends Controller
         $project->save();
     }
 
-    public function editaCampoArea(Request $request)
+    public function editArea(Request $request)
     {
         $novaArea = $request->area;
         $project = Project::find($request->id);
@@ -84,7 +99,7 @@ class ProjectController extends Controller
         $project->save();
     }
 
-    public function editaCampoAno(Request $request)
+    public function editYear(Request $request)
     {
         $novoAno = $request->ano;
         $project = Project::find($request->id);
@@ -92,7 +107,7 @@ class ProjectController extends Controller
         $project->save();
     }
 
-    public function editaCampoLocalizacao(Request $request)
+    public function editAddress(Request $request)
     {
         $novaLocalizacao = $request->localizacao;
         $project = Project::find($request->id);
@@ -100,7 +115,7 @@ class ProjectController extends Controller
         $project->save();
     }
 
-    public function editaCampoDescricao(Request $request)
+    public function editDescription(Request $request)
     {
         $novaDescricao = $request->descricao;
         $project = Project::find($request->id);
@@ -108,7 +123,7 @@ class ProjectController extends Controller
         $project->save();
     }
 
-    public function editaImagemCapa(Request $request)
+    public function editCover(Request $request)
     {
 
         $project = Project::find($request->id);
@@ -123,36 +138,4 @@ class ProjectController extends Controller
     }
 
 
-    public function show(int $projectId)
-    {
-        $project = Project::find($projectId);
-        $idProjeto = $project->id;
-        $images = Image::query()->orderBy('id')->where('project$projectId_id', $projectId)->get();
-
-        return view('admin-individual.index', compact('project', 'images', 'idProjeto'));
-    }
-
-    public function individualFotosStore(Request $request)
-    {
-        $idProjeto = $request->id;
-        $project = Project::find($idProjeto);
-        $fotos = [];
-        $fileRequest = $request->file('fotos');
-
-        foreach ($fileRequest as $file){
-
-            $nome = time().rand(1, 100). '.' . $file->extension();
-            $file->move(storage_path('app/public/colecao-fotos'), $nome);
-            $project->fotos()->create(['photo_path' =>  $nome, 'projeto_id' => $idProjeto]);
-
-        }
-
-        return redirect()->back();
-    }
-
-    public function individualFotosDestroy(Request $request, ImageRemover $removedorDeFotos)
-    {
-        $removedorDeFotos->destroyImages($request->id);
-        return redirect()->back();
-    }
 }

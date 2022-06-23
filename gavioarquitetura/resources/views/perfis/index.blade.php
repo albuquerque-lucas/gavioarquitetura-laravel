@@ -5,7 +5,7 @@
             width: 100%;
             justify-content: space-around;
         }
-        .card-perfil{
+        .profile-card{
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -13,7 +13,7 @@
             padding: 1em;
         }
 
-        .img-perfil{
+        .profile-img{
             margin-bottom: 2em;
         }
 
@@ -49,74 +49,74 @@
             width: 20em;
         }
 
-        .botao-editar{
+        .edit-button{
             height:2.5em;
         }
 
     </style>
     <div class="d-flex cards-container">
-        @foreach($perfis as $perfil)
-            <div class="card-perfil">
-                <div class="img-perfil">
-                    <img src="{{$perfil->img_path_url}}" class="image">
-                    <form method="post" enctype="multipart/form-data" action="/admin-projetos/{{$perfil->id}}/editaImagemProfile">
+
+        @foreach($profiles as $profile)
+
+            <div class="profile-card">
+                <div class="profile-img">
+                    <img src="{{$profile->img_path_url}}" class="image">
+                    <form method="post" enctype="multipart/form-data" action="/admin-projects/{{$profile->id}}/editImage">
                         @csrf
                         <input type="file" class="form-control border-secondary" name="img_path_profile">
-                        <button class="btn btn-primary botao-editar">
+                        <button class="btn btn-primary edit-button">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                     </form>
                 </div>
 
-
-
                 <div class="content-info">
 
                     <div class="d-flex">
 
-                        <div id="nome-perfil-{{$perfil->id}}" class="caixa-edicao">
+                        <div id="nome-perfil-{{$profile->id}}" class="caixa-edicao">
 
-                            <p>Nome: <span id="perfil-nome-{{$perfil->id}}">{{$perfil->nome}}</span> </p>
+                            <p>Nome: <span id="perfil-nome-{{$profile->id}}">{{$profile->name}}</span> </p>
 
                         </div>
-                        <div class="input-group" hidden id="input-nome-perfil-{{$perfil->id}}">
+                        <div class="input-group" hidden id="input-nome-perfil-{{$profile->id}}">
 
-                            <input type="text" class="form-control" value="{{$perfil->nome}}" id="input-nome-{{$perfil->id}}">
+                            <input type="text" class="form-control" value="{{$profile->name}}" id="input-nome-{{$profile->id}}">
 
                             <div class="input-group-append">
-                                <button class="btn btn-primary botao-editar" onclick="editarNome({{$perfil->id}})">
+                                <button class="btn btn-primary edit-button" onclick="editarNome({{$perfil->id}})">
                                     <i class="fa fa-check"></i>
                                 </button>
                                 @csrf
                             </div>
                         </div>
 
-                        <button class="btn btn-primary botao-editar" onclick="toggleInput({{$perfil->id}}, 'nome-perfil-', 'input-nome-perfil-')">
+                        <button class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'nome-perfil-', 'input-nome-perfil-')">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
 
                     </div>
 
                     <div class="d-flex">
-                        <div id="descricao-perfil-{{$perfil->id}}" class="descricao-div caixa-edicao">
+                        <div id="descricao-perfil-{{$profile->id}}" class="descricao-div caixa-edicao">
 
-                            <p>Descrição: <span id="perfil-descricao-{{$perfil->id}}">{{$perfil->descricao}}</span></p>
+                            <p>Descrição: <span id="perfil-descricao-{{$profile->id}}">{{$profile->description}}</span></p>
 
                         </div>
 
-                        <div class="input-group" hidden id="input-descricao-perfil-{{$perfil->id}}">
+                        <div class="input-group" hidden id="input-descricao-perfil-{{$profile->id}}">
 
-                            <textarea class="form-control" id="input-descricao-{{$perfil->id}}">
-                                {{$perfil->descricao}}
+                            <textarea class="form-control" id="input-descricao-{{$profile->id}}">
+                                {{$profile->description}}
                             </textarea>
 
-                            <button class="btn btn-primary botao-editar" onclick="editarDescricao({{$perfil->id}})">
+                            <button class="btn btn-primary edit-button" onclick="editarDescricao({{$profile->id}})">
                                 <i class="fa fa-check"></i>
                             </button>
 
                         </div>
 
-                        <button class="btn btn-primary botao-editar" onclick="toggleInput({{$perfil->id}}, 'descricao-perfil-', 'input-descricao-perfil-')">
+                        <button class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'descricao-perfil-', 'input-descricao-perfil-')">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
 

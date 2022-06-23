@@ -1,24 +1,24 @@
 <x-layout title="Lista de Projetos">
 
-    @if(!empty($mensagem))
+    @if(!empty($message))
         <div class="alert alert-success">
-            {{ $mensagem }}
+            {{ $message }}
         </div>
     @endif
 
         <div class="m-5 w-100 d-flex justify-content-center">
 
 
-                @foreach($categorias as $categoria)
+                @foreach($categories as $category)
 
                     <a
                         class="btn btn-dark category-btn"
-                        id="{{$categoria->nome}}"
-                        href="/admin-projetos/{{$categoria->nome}}/{{$categoria->id}}"
+                        id="{{$category->name}}"
+                        href="/admin-projects/{{$category->name}}/{{$category->id}}"
                         style=
                         "
                         margin-right: 1rem;
-                        @if($categoria->nome == $nome)
+                        @if($category->name == $name)
                             color: black;
                             background: white;
                             border: 2px solid black;
@@ -26,7 +26,7 @@
                         "
                     >
 
-                        {{$categoria->nome}}
+                        {{$category->name}}
 
                     </a>
 
@@ -36,7 +36,7 @@
         </div>
 
 
-        <a href="{{route('admin_projetos.create')}}" class="btn btn-dark mb-2">Adicionar</a>
+        <a href="{{route('admin_projects.create')}}" class="btn btn-dark mb-2">Adicionar</a>
 
         <table class="table">
             <thead>
@@ -52,23 +52,23 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($projetos as $project)
+            @foreach($projects as $project)
                 <div id="project-card">
                     <tr>
                         <th scope="row">{{$project->id}}</th>
-                        <td class="text-center">{{$project->nome}}</td>
+                        <td class="text-center">{{$project->name}}</td>
                         <td class="text-center">{{$project->area}}</td>
-                        <td class="text-center">{{$project->ano}}</td>
-                        <td class="text-center">{{$project->localizacao}}</td>
+                        <td class="text-center">{{$project->year}}</td>
+                        <td class="text-center">{{$project->address}}</td>
                         <td class="text-center"><img src="{{$project->img_path_url}}" alt="" class="img-thumbnail" width="250px"></td>
                         <td class="text-center">
-                            <a href="/admin-projetos/{{$project->id}}">
+                            <a href="{{route('admin_projects.show', ['id'=>$project->id])}}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </td>
                         <td class="text-center">
-                            <form method="post" action="{{route('admin_projetos.destroy', $project->id)}}"
-                                  onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($project->nome) }}?')">
+                            <form method="post" action="{{route('admin_projects.destroy', ['id', $project->id])}}"
+                                  onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($project->name) }}?')">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm">

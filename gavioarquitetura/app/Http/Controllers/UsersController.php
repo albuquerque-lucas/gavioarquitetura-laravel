@@ -22,6 +22,6 @@ class UsersController extends Controller
         $user = User::create($data);
         Auth::login($user);
 
-        return redirect()->route('admin_projetos.index');
+        return redirect()->route('admin_projects.index');
     }
 }

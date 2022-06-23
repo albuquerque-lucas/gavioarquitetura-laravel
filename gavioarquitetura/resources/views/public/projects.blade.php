@@ -6,16 +6,16 @@
             <ul>
                 @foreach($categories as $category)
                     <a
-                        href='/projetos/{{$category->nome}}/{{$category->id}}'
+                        href='/projetos/{{$category->name}}/{{$category->id}}'
                         class="
                         list-item
-                        @if($category->nome == $nome)
+                        @if($category->name == $name)
                             selecionado
                         @endif
                         "
                     >
                         <li>
-                            {{$category->nome}}
+                            {{$category->name}}
                         </li>
                     </a>
                 @endforeach
@@ -27,7 +27,7 @@
                 <a href="/project/{{$project->id}}">
                 <div class="project-card">
                     <img src="{{$project->img_path_url}}" alt="">
-                    <h3>{{$project->nome}}</h3>
+                    <h3>{{$project->name}}</h3>
                 </div>
                 </a>
             @endforeach

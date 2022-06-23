@@ -1,4 +1,4 @@
-<x-layout title="{{$projeto->nome}}">
+<x-layout title="{{$project->name}}">
     <style>
         .header-indivitual{
             text-align: center;
@@ -138,14 +138,14 @@
     </div>
 
     <div class="container itens-projeto col-5 w-100">
-        <form action="/photos/{{$project->id}}/individual/adicionarFoto" method="post" enctype="multipart/form-data">
+        <form action="{{route('images.store', ['id' => $project->id])}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="campo-adicao-imagens d-flex flex-column">
-                <label for="fotos">Adicionar Imagens</label>
+                <label for="images">Adicionar Imagens</label>
 
                 <input
                     type="file"
-                    name="fotos[]"
+                    name="images[]"
                     multiple
                     accept="image/*"
                 >
@@ -169,7 +169,7 @@
                         <th scope="row" class="text-center">{{$image->id}}</th>
                         <td class="text-center"><img src="{{$image->img_path_url}}" alt="" style="width:250px;"></td>
                         <td class="text-center">
-                            <form method="post" action="/admin-projetos/individual/excluirFoto/{{$image->id}}"
+                            <form method="post" action=""
                                   onsubmit="return confirm('Tem certeza que deseja remover a imagem?')">
                                 @csrf
                                 @method('DELETE')
@@ -199,89 +199,88 @@
             }
         }
 
-        function editName(projetoId){
+        function editName(project_id){
             let formData = new FormData();
-            const name = document.querySelector(`#input-nome-${projetoId}`).value;
+            const name = document.querySelector(`#input-nome-${project_id}`).value;
             const token = document.querySelector(`input[name="_token"]`).value;
             formData.append('nome', name);
             formData.append('_token', token);
-            const url = `/admin-projetos/${projetoId}/editaCampoNome`;
+            const url = `/admin-projects/${project_id}/editName`;
 
             fetch(url, {
                 body:formData,
                 method:'POST'
             }).then(()=>{
-                toggleInput(projetoId, `nome-projeto-`, `input-nome-projeto-`);
-                document.getElementById(`projeto-nome-${projetoId}`).textContent = nome;
+                toggleInput(project_id, `nome-projeto-`, `input-nome-projeto-`);
+                document.getElementById(`projeto-nome-${project_id}`).textContent = name;
             })
         }
 
-        function editArea(projetoId){
+        function editArea(project_id){
             let formData = new FormData();
-            const area = document.querySelector(`#input-area-${projetoId}`).value;
+            const area = document.querySelector(`#input-area-${project_id}`).value;
             const token = document.querySelector(`input[name="_token"]`).value;
             formData.append('area', area);
             formData.append('_token', token);
-            const url = `/admin-projetos/${projetoId}/editaCampoArea`;
+            const url = `/admin-projects/${project_id}/editArea`;
 
             fetch(url, {
                 body:formData,
                 method:'POST'
             }).then(()=>{
-                toggleInput(projetoId, `area-projeto-`, `input-area-projeto-`);
-                document.getElementById(`projeto-area-${projetoId}`).textContent = area;
+                toggleInput(project_id, `area-projeto-`, `input-area-projeto-`);
+                document.getElementById(`projeto-area-${project_id}`).textContent = area;
             })
         }
 
-        function editYear(projetoId){
+        function editYear(project_id){
             let formData = new FormData();
-            const ano = document.querySelector(`#input-ano-${projetoId}`).value;
+            const year = document.querySelector(`#input-ano-${project_id}`).value;
             const token = document.querySelector(`input[name="_token"]`).value;
-            formData.append('ano', ano);
+            formData.append('ano', year);
             formData.append('_token', token);
-            const url = `/admin-projetos/${projetoId}/editaCampoAno`;
+            const url = `/admin-projects/${project_id}/editYear`;
 
             fetch(url, {
                 body:formData,
                 method:'POST'
             }).then(()=>{
-                toggleInput(projetoId, `ano-projeto-`, `input-ano-projeto-`);
-                document.getElementById(`projeto-ano-${projetoId}`).textContent = ano;
+                toggleInput(project_id, `ano-projeto-`, `input-ano-projeto-`);
+                document.getElementById(`projeto-ano-${project_id}`).textContent = year;
             })
         }
 
-        function editAddress(projetoId){
+        function editAddress(project_id){
             let formData = new FormData();
-            const localizacao = document.querySelector(`#input-localizacao-${projetoId}`).value;
+            const address = document.querySelector(`#input-localizacao-${project_id}`).value;
             const token = document.querySelector(`input[name="_token"]`).value;
-            formData.append('localizacao', localizacao);
+            formData.append('localizacao', address);
             formData.append('_token', token);
-            const url = `/admin-projetos/${projetoId}/editaCampoLocalizacao`;
+            const url = `/admin-projects/${project_id}/editAddress`;
 
             fetch(url, {
                 body:formData,
                 method:'POST'
             }).then(()=>{
-                toggleInput(projetoId, `localizacao-projeto-`, `input-localizacao-projeto-`);
-                document.getElementById(`projeto-localizacao-${projetoId}`).textContent = localizacao;
+                toggleInput(project_id, `localizacao-projeto-`, `input-localizacao-projeto-`);
+                document.getElementById(`projeto-localizacao-${project_id}`).textContent = address;
             })
         }
 
-        function editDescription(projetoId){
+        function editDescription(project_id){
             let formData = new FormData();
-            const descricao = document.querySelector(`#input-descricao-${projetoId}`).value;
-            console.log(descricao);
+            const description = document.querySelector(`#input-descricao-${project_id}`).value;
             const token = document.querySelector(`input[name="_token"]`).value;
-            formData.append('descricao', descricao);
+            formData.append('descricao', description);
             formData.append('_token', token);
-            const url = `/admin-projetos/${projetoId}/editaCampoDescricao`;
+            const url = `/admin-projects/${project_id}/editDescription`;
 
             fetch(url, {
                 body:formData,
                 method:'POST'
             }).then(()=>{
-                toggleInput(projetoId, `descricao-projeto-`, `input-descricao-projeto-`);
-                document.getElementById(`projeto-descricao-${projetoId}`).textContent = descricao;
+                toggleInput(project_id, `descricao-projeto-`, `input-descricao-projeto-`);
+                document.getElementById(`projeto-descricao-${project_id}`).textContent = description;
             })
         }
 

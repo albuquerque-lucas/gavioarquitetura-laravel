@@ -36,12 +36,12 @@ class Project extends Model
         return Storage::url($baseDir.'sem-imagem.jpg');
     }
 
-    public function fotos()
+    public function images()
     {
         return $this->hasMany(Image::class);
     }
 
-    public function categoria()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }

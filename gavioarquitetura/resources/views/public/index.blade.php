@@ -10,7 +10,7 @@
                 <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
                     <img src="{{$project->img_path_url}}" class="d-block w-100">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>{{$project->nome}}</h5>
+                        <h5>{{$project->name}}</h5>
                     </div>
                 </div>
             @endforeach

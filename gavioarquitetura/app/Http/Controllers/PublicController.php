@@ -14,7 +14,7 @@ class PublicController extends Controller
     public function index(Request $request)
     {
         $title = "Gávio Arquitetura";
-        $projects = Project::query()->where('carrossel', true)->get();
+        $projects = Project::query()->where('activate_carousel', true)->get();
 
         return view('public.index', compact('projects', 'title'));
     }
@@ -23,10 +23,10 @@ class PublicController extends Controller
     {
         $title = "Nossos Projetos | Gávio Arquitetura";
         $id = $request->id;
-        $nome = $request->nome;
-        $projects = Project::query()->where('categoria_id', $id)->get();
+        $name = $request->name;
+        $projects = Project::query()->where('category_id', $id)->get();
         $categories = Category::query()->orderBy('id')->get();
-        return view('public.projects', compact('projects', 'categories', 'nome', 'title'));
+        return view('public.projects', compact('projects', 'categories', 'name', 'title'));
     }
 
     public function profile(Request $request)
@@ -35,15 +35,6 @@ class PublicController extends Controller
         $profiles = Profile::all();
 
         return view('public.about-us', compact('profiles', 'title'));
-    }
-
-    public function projects()
-    {
-        $nome = 'Projetos';
-        $title = "Nossos Projetos | Gávio Arquitetura";
-        $projects = Project::query()->orderBy('id')->get();
-        $categories = Category::query()->orderBy('id')->get();
-        return view('public.projects', compact('title', 'projects', 'categories', 'nome'));
     }
 
     public function show(int $idProject)

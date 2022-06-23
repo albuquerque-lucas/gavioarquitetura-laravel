@@ -12,15 +12,16 @@ class Image extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['photo_path', 'projeto_id'];
+    protected $fillable = ['img_path', 'project_id'];
+
 
     public function getPhotoPathUrlAttribute()
     {
 
         $baseDir = 'image-collections/';
 
-        if($this->photo_path){
-            return Storage::url($baseDir .$this->photo_path);
+        if($this->img_path){
+            return Storage::url($baseDir .$this->img_path);
         }
     }
 

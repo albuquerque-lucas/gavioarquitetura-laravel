@@ -17,32 +17,31 @@ class ProfileController extends Controller
 
     public function index(Request $request)
     {
-        $perfis = Profile::query()->orderBy('id')->get();
-        return view('perfis.index', compact('perfis'));
+        $profiles = Profile::query()->orderBy('id')->get();
+        return view('profiles.index', compact('profiles'));
     }
 
-    public function editaNomeProfile(Request $request)
+    public function editName(Request $request)
     {
-        $novoNome = $request->nome;
+        $newName = $request->name;
         $profile = Profile::find($request->id);
-        $profile->nome = $novoNome;
+        $profile->name = $newName;
         $profile->save();
     }
 
-    public function editaDescricaoProfile(Request $request)
+    public function editDescription(Request $request)
     {
-        $novaDescricao = $request->descricao;
+        $newDescription = $request->description;
         $profile = Profile::find($request->id);
-        $profile->descricao = $novaDescricao;
+        $profile->description = $newDescription;
         $profile->save();
     }
 
-    public function editaImagemProfile(Request $request)
+    public function editImage(Request $request)
     {
         $profile = Profile::find($request->id);
 
         Storage::disk('public')->delete($profile->img_path);
-        //Storage::delete($profile->img_path);
         $img = $request->file('img_path_profile')->store('users', 'public');
         $profile->img_path = $img;
         $profile->save();

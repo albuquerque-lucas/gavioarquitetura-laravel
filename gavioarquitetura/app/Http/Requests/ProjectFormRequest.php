@@ -24,10 +24,10 @@ class ProjectFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required',
+            'name' => 'required',
             'area'=> 'required',
-            'ano' => 'required',
-            'localizacao' => 'required'
+            'year' => 'required',
+            'address' => 'required'
         ];
     }
 
