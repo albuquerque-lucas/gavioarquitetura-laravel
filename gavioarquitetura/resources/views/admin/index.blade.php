@@ -67,7 +67,7 @@
                             </a>
                         </td>
                         <td class="text-center">
-                            <form method="post" action="{{route('admin_projects.destroy', ['id', $project->id])}}"
+                            <form method="post" action="{{route('admin_projects.destroy', $project->id)}}"
                                   onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($project->name) }}?')">
                                 @csrf
                                 @method('DELETE')

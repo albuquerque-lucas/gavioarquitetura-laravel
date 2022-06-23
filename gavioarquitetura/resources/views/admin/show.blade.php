@@ -169,7 +169,7 @@
                         <th scope="row" class="text-center">{{$image->id}}</th>
                         <td class="text-center"><img src="{{$image->img_path_url}}" alt="" style="width:250px;"></td>
                         <td class="text-center">
-                            <form method="post" action=""
+                            <form method="post" action="{{route('images.destroy', ['id' => $image->id])}}"
                                   onsubmit="return confirm('Tem certeza que deseja remover a imagem?')">
                                 @csrf
                                 @method('DELETE')

@@ -15,7 +15,7 @@ class Image extends Model
     protected $fillable = ['img_path', 'project_id'];
 
 
-    public function getPhotoPathUrlAttribute()
+    public function getImgPathUrlAttribute()
     {
 
         $baseDir = 'image-collections/';

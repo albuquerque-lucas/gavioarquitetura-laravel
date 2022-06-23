@@ -7,21 +7,23 @@ use Illuminate\Support\Facades\DB;
 
 class ImageRemover
 {
-    public function destroyImages(int $fotoId) : string
+    public function destroyImages(int $image_id) : string
     {
-        $nomeFoto = '';
-        DB::transaction(function() use ($fotoId, &$nomeFoto){
-            $foto = Image::find($fotoId);
-            $nomeFoto = $foto->photo_path;
-            $foto->delete();
+        $imageName = '';
+        $baseDir = 'app/public/image-collections/';
 
-            if($foto->photo_path)
+        DB::transaction(function() use ($image_id, &$imageName, $baseDir){
+            $image = Image::find($image_id);
+            $imageName = $image->img_path;
+            $image->delete();
+
+            if($image->img_path)
             {
-                unlink(storage_path('app/public/colecao-fotos/' . $nomeFoto));
+                unlink(storage_path($baseDir . $imageName));
             }
 
 
         });
-        return $nomeFoto;
+        return $imageName;
     }
 }
