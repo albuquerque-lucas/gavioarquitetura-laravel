@@ -11,11 +11,23 @@ class ProjectRemover
 {
     public function removeProject(int $project_id): string
     {
-        $projectName = '';
+        $project = Project::find($project_id);
+        $projectName = $project->name;
 
-        DB::transaction(function() use($project_id, &$projectName){
-            $project = Project::find($project_id);
+        $this->removeImages($project_id);
 
+        $project->delete();
+
+        return $projectName;
+    }
+
+    protected function removeImages($project_id)
+    {
+
+        $imageName = '';
+        $project = Project::find($project_id);
+
+        DB::transaction(function() use($project, $project_id, $imageName){
             Storage::disk('public')->delete($project->fotos);
 
             $project->images->each(function (Image $image){
@@ -24,20 +36,14 @@ class ProjectRemover
                 unlink(storage_path($storagePath . $imageName));
                 $image->delete();
             });
-
-            $projectName = $project->name;
-
-            if($project->img_path)
-            {
-                Storage::disk('public')->delete($project->img_path);
-            }
-
-            $project->delete();
-
-
         });
 
+        if($project->img_path)
+        {
+            Storage::disk('public')->delete($project->img_path);
+        }
 
-        return $projectName;
+        return $imageName;
+
     }
 }

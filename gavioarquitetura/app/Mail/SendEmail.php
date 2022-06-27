@@ -12,10 +12,10 @@ class SendEmail extends Mailable
     use Queueable, SerializesModels;
 
     public
-        $nome,
+        $name,
         $email,
-        $assunto,
-        $mensagem;
+        $subject,
+        $message;
 
 
     /**
@@ -24,16 +24,16 @@ class SendEmail extends Mailable
      * @return void
      */
     public function __construct(
-        $nome,
+        $name,
         $email,
-        $assunto,
-        $mensagem
+        $subject,
+        $message
     )
     {
-        $this->nome = $nome;
+        $this->name = $name;
         $this->email = $email;
-        $this->assunto = $assunto;
-        $this->mensagem = $mensagem;
+        $this->subject = $subject;
+        $this->message = $message;
 
     }
 

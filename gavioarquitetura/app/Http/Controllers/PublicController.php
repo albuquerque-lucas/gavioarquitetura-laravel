@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class PublicController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
         $title = "Gávio Arquitetura";
         $projects = Project::query()->where('activate_carousel', true)->get();
@@ -19,7 +19,7 @@ class PublicController extends Controller
         return view('public.index', compact('projects', 'title'));
     }
 
-    public function categoryIndex(Request $request)
+    public function projectsByCategory(Request $request)
     {
         $title = "Nossos Projetos | Gávio Arquitetura";
         $id = $request->id;

@@ -4,25 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Services\ImageRemover;
+use App\Services\ImageUploader;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, ImageUploader $imageUploader)
     {
         $project_id = $request->id;
         $project = Project::find($project_id);
-        $images = [];
-        $fileRequest = $request->file('images');
-
-        foreach ($fileRequest as $file){
-
-            $name = time().rand(1, 100). '.' . $file->extension();
-            $storage_path = 'app/public/image-collections';
-            $file->move(storage_path($storage_path), $name);
-            $project->images()->create(['img_path' =>  $name, 'project_id' => $project_id]);
-
-        }
+        $imageUploader->upload($request, 'images', $project, $project_id);
 
         return redirect()->back();
     }

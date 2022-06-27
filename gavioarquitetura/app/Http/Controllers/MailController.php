@@ -18,8 +18,9 @@ class MailController extends Controller
             $request->mensagem
         );
 
-        Mail::to($defaultMail)->send($email);
+        $when = now()->addSeconds(2);
+        Mail::to($defaultMail)->later($when , $email);
 
-        return redirect()->route('email');
+        return redirect()->back();
     }
 }

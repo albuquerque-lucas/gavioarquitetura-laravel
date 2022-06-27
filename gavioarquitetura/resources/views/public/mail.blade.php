@@ -15,10 +15,10 @@
 
         <form action="{{route('mail.store')}}" method="post">
             @csrf
-            <input type="text" name='nome' placeholder='Seu nome'>
+            <input type="text" name='name' placeholder='Seu nome'>
             <input type="text" name='email' placeholder='Seu e-mail'>
-            <input type="text" name='assunto' placeholder='Digite um assunto'>
-            <textarea name="mensagem" id="message" placeholder='Mensagem'></textarea>
+            <input type="text" name='subject' placeholder='Digite um assunto'>
+            <textarea name="message" id="message" placeholder='Mensagem'></textarea>
             <button type='submit' name='submit'>Enviar</button>
         </form>
     </div>

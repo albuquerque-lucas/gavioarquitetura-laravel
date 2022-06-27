@@ -21,7 +21,7 @@ Route::get('/contato', [PublicController::class, 'email'])->name('email');
 Route::post('/email/store', [MailController::class, 'store'])->name('mail.store');
 
 
-Route::get('/projetos/{name}/{id}', [PublicController::class, 'categoryIndex']);
+Route::get('/projetos/{name}/{id}', [PublicController::class, 'projectsByCategory']);
 Route::get('/projetos', function (){
         return redirect('/projetos/Residencial/1');
     })->name('projetos');
@@ -36,7 +36,7 @@ Route::post('/register', [UsersController::class, 'store'])->name('users.store')
 
 
 Route::get('/admin-projects', [ProjectController::class, 'index'])->name('admin_projects.index');
-Route::get('/admin-projects/{name}/{id}', [ProjectController::class, 'categoryIndex'])->name('categoryIndex');
+Route::get('/admin-projects/{name}/{id}', [ProjectController::class, 'categoryIndex'])->name('projectsByCategory');
 Route::get('/admin-projects/create', [ProjectController::class, 'create'])->name('admin_projects.create');
 Route::post('/admin-projects', [ProjectController::class, 'store'])->name('admin_projects.store');
 Route::delete('/admin-projects/{id}', [ProjectController::class, 'destroy'])->name('admin_projects.destroy');
