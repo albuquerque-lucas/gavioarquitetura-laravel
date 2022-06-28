@@ -1,9 +1,9 @@
 @component('mail::message')
 
-# Mensagem de {{ $nome }}
+# Mensagem de {{ $name }}
 # E-mail: {{ $email }}
-# Assunto: {{ $assunto }}
-# Mensagem: {{ $mensagem }}
+# Assunto: {{ $subject }}
+# Mensagem: {{ $message }}
 
 
 @endcomponent
