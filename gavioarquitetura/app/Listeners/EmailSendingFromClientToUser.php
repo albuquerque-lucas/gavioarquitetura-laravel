@@ -31,7 +31,7 @@ class EmailSendingFromClientToUser implements ShouldQueue
      */
     public function handle(EmailSent $event)
     {
-        $defaultMail = 'lucaslpra@gmail.com';
+        $defaultMail = 'gavioarquitetura@gmail.com';
         $email = new SendEmail(
             $event->clientName,
             $event->clientEmail,

@@ -74,49 +74,50 @@
 
                     <div class="d-flex">
 
-                        <div id="nome-perfil-{{$profile->id}}" class="caixa-edicao">
+                        <div id="name-box-{{$profile->id}}" class="caixa-edicao">
 
-                            <p>Nome: <span id="perfil-nome-{{$profile->id}}">{{$profile->name}}</span> </p>
+                            <p>Nome: <span id="profile-name-{{$profile->id}}">{{$profile->name}}</span> </p>
 
                         </div>
-                        <div class="input-group" hidden id="input-nome-perfil-{{$profile->id}}">
 
-                            <input type="text" class="form-control" value="{{$profile->name}}" id="input-nome-{{$profile->id}}">
+                        <div class="input-group" hidden id="input-profile-name-{{$profile->id}}">
+
+                            <input type="text" class="form-control" value="{{$profile->name}}" id="input-name-{{$profile->id}}">
 
                             <div class="input-group-append">
-                                <button class="btn btn-primary edit-button" onclick="editarNome({{$profile->id}})">
+                                <button class="btn btn-primary edit-button" onclick="editName({{$profile->id}})">
                                     <i class="fa fa-check"></i>
                                 </button>
                                 @csrf
                             </div>
                         </div>
 
-                        <button class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'nome-perfil-', 'input-nome-perfil-')">
+                        <button class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'name-box-', 'input-profile-name-')">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
 
                     </div>
 
                     <div class="d-flex">
-                        <div id="descricao-perfil-{{$profile->id}}" class="descricao-div caixa-edicao">
+                        <div id="description-box-{{$profile->id}}" class="descricao-div caixa-edicao">
 
-                            <p>Descrição: <span id="perfil-descricao-{{$profile->id}}">{{$profile->description}}</span></p>
+                            <p>Descrição: <span id="profile-description-{{$profile->id}}">{{$profile->description}}</span></p>
 
                         </div>
 
-                        <div class="input-group" hidden id="input-descricao-perfil-{{$profile->id}}">
+                        <div class="input-group" hidden id="input-profile-description-{{$profile->id}}">
 
-                            <textarea class="form-control" id="input-descricao-{{$profile->id}}">
+                            <textarea class="form-control" id="input-description-{{$profile->id}}">
                                 {{$profile->description}}
                             </textarea>
 
-                            <button class="btn btn-primary edit-button" onclick="editarDescricao({{$profile->id}})">
+                            <button class="btn btn-primary edit-button" onclick="editDescription({{$profile->id}})">
                                 <i class="fa fa-check"></i>
                             </button>
 
                         </div>
 
-                        <button class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'descricao-perfil-', 'input-descricao-perfil-')">
+                        <button class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'description-box-', 'input-profile-description-')">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
 
@@ -125,9 +126,9 @@
 
             </div>
             <script>
-                function toggleInput(perfilId, elemento, inputElemento){
-                    const item = document.getElementById(elemento+perfilId);
-                    const input = document.getElementById(inputElemento+perfilId);
+                function toggleInput(profileId, element, inputElement){
+                    const item = document.getElementById(element+profileId);
+                    const input = document.getElementById(inputElement+profileId);
 
                     if(item.hasAttribute('hidden')){
                         item.removeAttribute('hidden');
@@ -138,37 +139,37 @@
                     }
                 }
 
-                function editName(perfilId){
+                function editName(profileId){
                     let formData = new FormData();
-                    const nome = document.querySelector(`#input-nome-${perfilId}`).value;
+                    const name = document.querySelector(`#input-name-${profileId}`).value;
                     const token = document.querySelector(`input[name="_token"]`).value;
-                    formData.append('nome', nome);
+                    formData.append('name', name);
                     formData.append('_token', token);
-                    const url = `/profiles/${perfilId}/editName`;
+                    const url = `/profiles/${profileId}/editName`;
 
                     fetch(url, {
                         body:formData,
                         method:'POST'
                     }).then(()=>{
-                        toggleInput(perfilId, 'nome-perfil-', 'input-nome-perfil-');
-                        document.getElementById(`perfil-nome-${perfilId}`).textContent = nome;
+                        toggleInput(profileId, 'name-box-', 'input-profile-name-');
+                        document.getElementById(`profile-name-${profileId}`).textContent = name;
                     })
                 }
 
-                function editDescription(perfilId){
+                function editDescription(profileId){
                     let formData = new FormData();
-                    const descricao = document.querySelector(`#input-descricao-${perfilId}`).value;
+                    const description = document.querySelector(`#input-description-${profileId}`).value;
                     const token = document.querySelector(`input[name="_token"]`).value;
-                    formData.append('descricao', descricao);
+                    formData.append('description', description);
                     formData.append('_token', token);
-                    const url = `/profiles/${perfilId}/editDescription`;
+                    const url = `/profiles/${profileId}/editDescription`;
 
                     fetch(url, {
                         body:formData,
                         method: 'POST'
                     }).then(()=>{
-                        toggleInput(perfilId, 'descricao-perfil-', 'input-descricao-perfil-');
-                        document.getElementById(`perfil-descricao-${perfilId}`).textContent = descricao;
+                        toggleInput(profileId, 'description-box-', 'input-profile-description-');
+                        document.getElementById(`profile-description-${profileId}`).textContent = description;
                     })
                 }
             </script>

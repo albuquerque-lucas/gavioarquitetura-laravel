@@ -46,9 +46,10 @@ class PublicController extends Controller
         return view('public.show', compact('project', 'images', 'title'));
     }
 
-    public function email()
+    public function email(Request $request)
     {
         $title = "Contato | Gávio Arquitetura";
-        return view('public.mail', compact('title'));
+        $message = $request->session()->get('message');
+        return view('public.mail', compact('title', 'message'));
     }
 }

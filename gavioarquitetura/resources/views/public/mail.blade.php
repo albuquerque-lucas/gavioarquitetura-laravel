@@ -13,6 +13,12 @@
 {{--        <?php }} ?>--}}
 
 
+        @if(!empty($message))
+            <div class="alert alert-success">
+                {{ $message }}
+            </div>
+        @endif
+
         <form action="{{route('mail.store')}}" method="post">
             @csrf
             <input type="text" name='name' placeholder='Seu nome'>

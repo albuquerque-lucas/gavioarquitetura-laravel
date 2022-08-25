@@ -12,12 +12,12 @@
             </div>
 
         </div>
-    </div
+    </div>
     <div class="footer-content">
         <div class="footer-form">
             <strong>Entre em contato conosco!</strong>
             <form action="{{route('mail.store')}}" method="POST">
-
+                @csrf
                 <input type="text" name='name' placeholder='Seu nome'>
 
                 <input type="text" name='email' placeholder='Seu e-mail'>
