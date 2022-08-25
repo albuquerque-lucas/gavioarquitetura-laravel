@@ -17,9 +17,14 @@ class Profile extends Model
         'img_path'
     ];
 
-    public function getImgPathurlAttribute()
+    public function getImgPathUrlAttribute()
     {
-        return Storage::url($this->img_path);
 
+        $baseDir = 'users/';
+
+        if($this->img_path){
+            return Storage::url($this->img_path);
+        }
+        return Storage::url($baseDir.'sem-imagem.png');
     }
 }

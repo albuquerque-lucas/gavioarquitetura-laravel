@@ -84,7 +84,7 @@
                             <input type="text" class="form-control" value="{{$profile->name}}" id="input-nome-{{$profile->id}}">
 
                             <div class="input-group-append">
-                                <button class="btn btn-primary edit-button" onclick="editarNome({{$perfil->id}})">
+                                <button class="btn btn-primary edit-button" onclick="editarNome({{$profile->id}})">
                                     <i class="fa fa-check"></i>
                                 </button>
                                 @csrf
@@ -144,7 +144,7 @@
                     const token = document.querySelector(`input[name="_token"]`).value;
                     formData.append('nome', nome);
                     formData.append('_token', token);
-                    const url = `/admin-projetos/${perfilId}/editaNomePerfil`;
+                    const url = `/profiles/${perfilId}/editName`;
 
                     fetch(url, {
                         body:formData,
@@ -161,7 +161,7 @@
                     const token = document.querySelector(`input[name="_token"]`).value;
                     formData.append('descricao', descricao);
                     formData.append('_token', token);
-                    const url = `/admin-projetos/${perfilId}/editaDescricaoPerfil`;
+                    const url = `/profiles/${perfilId}/editDescription`;
 
                     fetch(url, {
                         body:formData,

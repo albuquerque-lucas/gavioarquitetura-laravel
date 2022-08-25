@@ -9,11 +9,11 @@
                     <img src="{{$profile->img_path_url}}" alt="">
                 </div>
                 <div class="profile-title">
-                    <h3>{{$profile->nome}}</h3>
+                    <h3>{{$profile->name}}</h3>
                 </div>
                 <div class="profile-text">
                     <p>
-                        {{$profile->descricao}}
+                        {{$profile->description}}
                     </p>
                 </div>
 
