@@ -16,15 +16,15 @@
     <div class="footer-content">
         <div class="footer-form">
             <strong>Entre em contato conosco!</strong>
-            <form action="index.php" method="POST">
+            <form action="{{route('mail.store')}}" method="POST">
 
-                <input type="text" name='nome' placeholder='Seu nome'>
+                <input type="text" name='name' placeholder='Seu nome'>
 
                 <input type="text" name='email' placeholder='Seu e-mail'>
 
-                <input type="text" name='assunto' placeholder='Digite um assunto'>
+                <input type="text" name='subject' placeholder='Digite um assunto'>
 
-                <textarea name="mensagem" id="message-text" placeholder='Mensagem'></textarea>
+                <textarea name="message" id="message-text" placeholder='Mensagem'></textarea>
                 <button type='submit' name='submit'>Enviar</button>
             </form>
 

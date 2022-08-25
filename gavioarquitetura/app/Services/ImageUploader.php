@@ -12,6 +12,7 @@ class ImageUploader
 
         $images = [];
         $fileRequest = $request->file($file_input);
+
         foreach ($fileRequest as $file){
 
             $name = time().rand(1, 100). '.' . $file->extension();

@@ -3,8 +3,9 @@
 namespace App\Services;
 
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
 
-class ProjectCreator
+class ProjectHandler
 {
     public function createProject(string $name, string $area, string $year, string $address, $description, ?string $imgPath, string $categoryId, bool $activateCarousel) : Project
     {
@@ -21,15 +22,23 @@ class ProjectCreator
         return $project;
     }
 
-    public function coverUpload($request)
+    public function uploadCover($request, $input)
     {
         $image = null;
 
-        if($request->hasFile('img_path'))
+        if($request->hasFile($input))
         {
-            $image = $request->file('img_path')->store('project-cover', 'public');
+            $image = $request->file($input)->store('project-cover', 'public');
         }
 
         return $image;
+    }
+
+    public function removeOldCover(Project $project)
+    {
+        if($project->img_path)
+        {
+            Storage::disk('public')->delete($project->img_path);
+        }
     }
 }

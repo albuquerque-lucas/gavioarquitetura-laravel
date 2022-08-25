@@ -1,5 +1,9 @@
-<x-layout title="Login">
-    <form action="" method="post">
+<x-layout title="">
+    <style>
+
+    </style>
+    <form action="" method="post" class="w-50 position-absolute top-50 start-50 translate-middle">
+        <h1>Login Admin</h1>
         @csrf
         <div class="form-group">
             <label for="email" class="form-label">E-mail</label>
@@ -16,8 +20,9 @@
         </button>
 
 
-        <a href="{{route('users.create')}}" class="btn btn-secondary mt-3">
+        <a href="{{route('users.create')}}" class="btn btn-secondary mt-3 mb-3">
             Registrar
         </a>
     </form>
+
 </x-layout>

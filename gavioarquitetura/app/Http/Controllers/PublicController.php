@@ -24,7 +24,7 @@ class PublicController extends Controller
         $title = "Nossos Projetos | Gávio Arquitetura";
         $id = $request->id;
         $name = $request->name;
-        $projects = Project::query()->where('category_id', $id)->get();
+        $projects = Project::query()->where('category_id', $id)->orderByDesc('id')->get();
         $categories = Category::query()->orderBy('id')->get();
         return view('public.projects', compact('projects', 'categories', 'name', 'title'));
     }
@@ -37,11 +37,11 @@ class PublicController extends Controller
         return view('public.about-us', compact('profiles', 'title'));
     }
 
-    public function show(int $idProject)
+    public function show(int $project_id)
     {
-        $project = Project::find($idProject);
-        $title = $project->nome . ' | Gávio Arquitetura';
-        $images = Image::query()->orderBy('id')->where('projeto_id', $idProject)->get();
+        $project = Project::find($project_id);
+        $title = $project->name . ' | Gávio Arquitetura';
+        $images = Image::query()->orderBy('id')->where('project_id', $project_id)->get();
 
         return view('public.show', compact('project', 'images', 'title'));
     }

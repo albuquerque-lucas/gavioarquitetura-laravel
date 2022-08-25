@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     font-family: var(--primary-text-font);
-
+    margin-bottom: 3rem;
 }
 .form-section p{
     margin: 5rem 0 2rem;
@@ -86,7 +86,7 @@ form-mensagem-envio{
         margin-top: 1rem;
         width: 15rem;
     }
-    
+
 }
 
 @media (min-width: 920px){

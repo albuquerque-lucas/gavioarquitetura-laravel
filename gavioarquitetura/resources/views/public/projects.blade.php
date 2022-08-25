@@ -24,7 +24,7 @@
 
         <div class="project-list">
             @foreach($projects as $project)
-                <a href="/project/{{$project->id}}">
+                <a href="{{route('public.show', $project->id)}}">
                 <div class="project-card">
                     <img src="{{$project->img_path_url}}" alt="">
                     <h3>{{$project->name}}</h3>
@@ -34,5 +34,5 @@
         </div>
 
     </div>
-
+    <x-footer/>
 </x-layout-public>

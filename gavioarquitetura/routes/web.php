@@ -43,13 +43,13 @@ Route::delete('/admin-projects/{id}', [ProjectController::class, 'destroy'])->na
 Route::get('/admin-projects/{id}',  [ProjectController::class, 'show'])->name('admin_projects.show');
 
 
-
 Route::post('/admin-projects/{id}/editName', [ProjectController::class, 'editName']);
 Route::post('/admin-projects/{id}/editArea', [ProjectController::class, 'editArea']);
 Route::post('/admin-projects/{id}/editYear', [ProjectController::class, 'editYear']);
 Route::post('/admin-projects/{id}/editAddress', [ProjectController::class, 'editAddress']);
-Route::post('/admin-projects/{id}/editCover', [ProjectController::class, 'editCover']);
+Route::post('/admin-projects/{id}/editCover', [ProjectController::class, 'editCover'])->name('image.edit');
 Route::post('/admin-projects/{id}/editDescription', [ProjectController::class, 'editDescription']);
+
 
 Route::post('/images/{id}/add', [ImageController::class, 'store'])->name('images.store');
 Route::delete('/images/{id}', [ImageController::class, 'destroy'])->name('images.destroy');

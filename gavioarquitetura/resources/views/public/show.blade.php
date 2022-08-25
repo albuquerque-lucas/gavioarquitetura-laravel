@@ -7,7 +7,7 @@
         </div>
 
         <div class="title-content">
-            <h1>{{$project->nome}}</h1>
+            <h1>{{$project->name}}</h1>
         </div>
 
         <div class="info-project">
@@ -25,19 +25,19 @@
                         <td>
                             <i>Ano:</i>
                         </td>
-                        <td>{{$project->ano}}</td>
+                        <td>{{$project->year}}</td>
                     </tr>
                     <tr>
                         <td>
                             <i>Localização:</i>
                         </td>
-                        <td>{{$project->localizacao}}</td>
+                        <td>{{$project->address}}</td>
                 </table>
             </div>
 
             <div class="project-description">
                 <p>
-                    {{$project->descricao}}
+                    {{$project->description}}
                 </p>
             </div>
 
@@ -51,5 +51,5 @@
             @endforeach
         </div>
     </div>
-
+    <x-footer/>
 </x-layout-public>

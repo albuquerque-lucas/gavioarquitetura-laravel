@@ -7,7 +7,8 @@ use App\Models\Image;
 use App\Models\Category;
 use App\Models\Project;
 use App\Http\Requests\ProjectFormRequest;
-use App\Services\ProjectCreator;
+use App\Services\ImageUploader;
+use App\Services\ProjectHandler;
 use App\Services\ImageRemover;
 use App\Services\ProjectRemover;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $name = 'Projetos';
-        $projects = Project::query()->orderBy('id')->get();
+        $projects = Project::query()->orderByDesc('id')->get();
         $categories = Category::query()->orderBy('id')->get();
         $message = $request->session()->get('message');
         return view('admin.index', compact('projects', 'message', 'categories', 'name'));
@@ -35,7 +36,7 @@ class ProjectController extends Controller
     {
         $id = $request->id;
         $name = $request->name;
-        $projects = Project::query()->where('category_id', $id)->get();
+        $projects = Project::query()->where('category_id', $id)->orderByDesc('id')->get();
         $categories = Category::query()->orderBy('id')->get();
         $message = $request->session()->get('mensagem');
         return view('admin.index', compact('projects', 'categories', 'message', 'name'));
@@ -48,10 +49,10 @@ class ProjectController extends Controller
         return view('admin.create', compact('categories'));
     }
 
-    public function store(ProjectFormRequest $request, ProjectCreator $projectCreator)
+    public function store(ProjectFormRequest $request, ProjectHandler $projectCreator)
     {
 
-        $image = $projectCreator->coverUpload($request);
+        $image = $projectCreator->uploadCover($request, 'img_path');
         $project = $projectCreator->createProject(
             $request->name,
             $request->area,
@@ -63,7 +64,7 @@ class ProjectController extends Controller
             $request->activate_carousel);
 
         $request->session()->flash('message', "Projeto $project->name adicionado com sucesso.");
-        return redirect()->route('admin_projects.index');
+        return redirect('/admin-projects/'.$project->id);
 
     }
 
@@ -85,52 +86,54 @@ class ProjectController extends Controller
 
     public function editName(Request $request)
     {
-        $novoNome = $request->nome;
+        $newName = $request->name;
         $project = Project::find($request->id);
-        $project->nome = $novoNome;
+        $project->name = $newName;
         $project->save();
     }
 
     public function editArea(Request $request)
     {
-        $novaArea = $request->area;
+        $newArea = $request->area;
         $project = Project::find($request->id);
-        $project->area = $novaArea;
+        $project->area = $newArea;
         $project->save();
     }
 
     public function editYear(Request $request)
     {
-        $novoAno = $request->ano;
+        $newDate = $request->year;
         $project = Project::find($request->id);
-        $project->ano = $novoAno;
+        $project->year = $newDate;
         $project->save();
     }
 
     public function editAddress(Request $request)
     {
-        $novaLocalizacao = $request->localizacao;
+        $newAddress = $request->address;
         $project = Project::find($request->id);
-        $project->localizacao = $novaLocalizacao;
+        $project->address = $newAddress;
         $project->save();
     }
 
     public function editDescription(Request $request)
     {
-        $novaDescricao = $request->descricao;
+        $newDescription = $request->description;
         $project = Project::find($request->id);
-        $project->descricao = $novaDescricao;
+        $project->description = $newDescription;
         $project->save();
     }
 
-    public function editCover(Request $request)
+    public function editCover(Request $request, ProjectHandler $projectHandler)
     {
 
         $project = Project::find($request->id);
-
+        $projectHandler->removeOldCover($project);
+        $projectHandler->uploadCover($request, 'img_path-edit');
 
         Storage::delete($project->img_path);
-        $img = $request->file('img_path-edit')->store('projeto-capa');
+
+        $img = $request->file('img_path-edit')->store('project-cover');
         $project->img_path = $img;
         $project->save();
 

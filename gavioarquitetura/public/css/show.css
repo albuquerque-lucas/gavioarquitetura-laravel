@@ -32,22 +32,22 @@
 
 .title-content{
     max-width: 98%;
-    margin: 2rem 0;
+    margin: 2rem auto;
 }
 .title-content h1{
     font-size: 2.8rem;
-    text-align: justify;
+    text-align: center;
 }
 
 .info-project{
-    margin: 2.5rem 0;
+    margin: 2.5rem auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .info-data{
-    margin: 1rem 0;
+    margin: 1rem 2rem;
     width: 90%;
     max-width: 340px;
 }
@@ -68,7 +68,7 @@
 }
 .project-description{
     max-width: 550px;
-    margin: 3rem 0;
+    margin: 3rem;
 }
 
 .project-description p{
@@ -116,7 +116,7 @@
     .info-project{
         width:65%;
     }
-    
+
     .project-description p{
         font-size: 1.2rem;
     }

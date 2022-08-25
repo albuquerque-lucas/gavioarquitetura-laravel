@@ -42,7 +42,6 @@
 body{
     background-image: url("../storage/assets/Cafe-pequeno-solucoes-criativas-fundo-site.jpg");
     background-repeat: no-repeat;
-    background-position: center;
     background-attachment: fixed;
 }
 header{
@@ -53,7 +52,6 @@ header{
     height: 7.5rem;
     background: rgba(0, 0, 0, .3);
     position: relative;
-    top: -.5rem;
 }
 .nav-button{
     height: 2rem;
@@ -130,7 +128,6 @@ header{
     flex-direction: column;
     justify-content: space-between;
     padding: .5rem;
-    position: relative;
 
 }
 .nav-menu ul li{

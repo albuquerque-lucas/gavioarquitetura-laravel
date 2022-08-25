@@ -22,5 +22,5 @@
         @endforeach
 
     </div>
-
+    <x-footer/>
 </x-layout-public>

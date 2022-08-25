@@ -14,6 +14,6 @@ class MailController extends Controller
 
         EmailSent::dispatch($request->name, $request->email, $request->subject, $request->message);
 
-        return redirect()->route('email');
+        return redirect()->back();
     }
 }

@@ -1,4 +1,4 @@
-<x-layout title="Lista de Projetos">
+<x-layout>
 
     @if(!empty($message))
         <div class="alert alert-success">
@@ -62,7 +62,7 @@
                         <td class="text-center">{{$project->address}}</td>
                         <td class="text-center"><img src="{{$project->img_path_url}}" alt="" class="img-thumbnail" width="250px"></td>
                         <td class="text-center">
-                            <a href="{{route('admin_projects.show', ['id'=>$project->id])}}">
+                            <a class="link-dark" href="{{route('admin_projects.show', ['id'=>$project->id])}}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </td>

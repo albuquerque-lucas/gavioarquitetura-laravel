@@ -1,4 +1,4 @@
-<x-layout title="Adicionar Projeto">
+<x-layout>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
