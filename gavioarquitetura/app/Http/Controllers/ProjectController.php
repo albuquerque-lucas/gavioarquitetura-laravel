@@ -7,10 +7,7 @@ use App\Models\Image;
 use App\Models\Category;
 use App\Models\Project;
 use App\Http\Requests\ProjectFormRequest;
-use App\Services\ImageUploader;
 use App\Services\ProjectHandler;
-use App\Services\ImageRemover;
-use App\Services\ProjectRemover;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,10 +65,10 @@ class ProjectController extends Controller
 
     }
 
-    public function destroy(Request $request, ProjectRemover $projectRemover)
+    public function destroy(Request $request, ProjectHandler $projectHandler)
     {
 
-        $projectName = $projectRemover->removeProject($request->id);
+        $projectName = $projectHandler->removeProject($request->id);
         $request->session()->flash('mensagem', "O projeto $projectName foi removido com sucesso.");
         return redirect()->back();
 

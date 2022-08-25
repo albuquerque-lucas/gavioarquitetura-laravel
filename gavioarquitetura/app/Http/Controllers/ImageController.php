@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Services\ImageRemover;
-use App\Services\ImageUploader;
+use App\Services\ImageHandler;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    public function store(Request $request, ImageUploader $imageUploader)
+    public function store(Request $request, ImageHandler $imageUploader)
     {
         $project_id = $request->id;
         $project = Project::find($project_id);
@@ -18,9 +18,9 @@ class ImageController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(Request $request, ImageRemover $imageRemover)
+    public function destroy(Request $request, ImageHandler $imageHandler)
     {
-        $imageRemover->destroyImages($request->id);
+        $imageHandler->destroyImages($request->id);
         return redirect()->back();
     }
 }
