@@ -16,6 +16,11 @@
     <div class="footer-content">
         <div class="footer-form">
             <strong>Entre em contato conosco!</strong>
+            @if(!empty($message))
+                <div class="alert alert-success w-50 text-center">
+                    {{ $message }}
+                </div>
+            @endif
             <form action="{{route('mail.store')}}" method="POST">
                 @csrf
                 <input type="text" name='name' placeholder='Seu nome'>

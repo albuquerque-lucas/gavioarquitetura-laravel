@@ -9,7 +9,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 80vh;
+            height: 80%;
             padding: 1em;
         }
 
@@ -34,6 +34,13 @@
             margin-bottom: 1em;
             margin-right: .1em;
             width: 20rem;
+            box-shadow: inset 0 0 .5em white;
+            transition: .1s ease-in-out;
+        }
+
+        .caixa-edicao:hover{
+            box-shadow: inset 0 0 1em white;
+
         }
 
         .content-info p,
@@ -74,22 +81,22 @@
 
                     <div class="d-flex">
 
-                        <div id="name-box-{{$profile->id}}" class="caixa-edicao">
+                        <div id="name-box-{{$profile->id}}" class="caixa-edicao" onclick="toggleInput({{$profile->id}}, 'name-box-', 'input-profile-name-')">
 
-                            <p>Nome: <span id="profile-name-{{$profile->id}}">{{$profile->name}}</span> </p>
+                            <p><strong>Nome:</strong> <span id="profile-name-{{$profile->id}}">{{$profile->name}}</span> </p>
 
                         </div>
 
                         <div class="input-group" hidden id="input-profile-name-{{$profile->id}}">
 
                             <input type="text" class="form-control" value="{{$profile->name}}" id="input-name-{{$profile->id}}">
-
                             <div class="input-group-append">
                                 <button class="btn btn-primary edit-button" onclick="editName({{$profile->id}})">
                                     <i class="fa fa-check"></i>
                                 </button>
                                 @csrf
                             </div>
+
                         </div>
 
                         <button class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'name-box-', 'input-profile-name-')">
@@ -99,15 +106,18 @@
                     </div>
 
                     <div class="d-flex">
-                        <div id="description-box-{{$profile->id}}" class="descricao-div caixa-edicao">
+                        <div id="description-box-{{$profile->id}}" class="descricao-div caixa-edicao" onclick="toggleInput({{$profile->id}}, 'description-box-', 'input-profile-description-')">
 
-                            <p>Descrição: <span id="profile-description-{{$profile->id}}">{{$profile->description}}</span></p>
+                                <strong>Descrição:</strong>
+                            <p>
+                                <span id="profile-description-{{$profile->id}}">{{$profile->description}}</span>
+                            </p>
 
                         </div>
 
                         <div class="input-group" hidden id="input-profile-description-{{$profile->id}}">
 
-                            <textarea class="form-control" id="input-description-{{$profile->id}}">
+                            <textarea class="form-control w-75" id="input-description-{{$profile->id}}">
                                 {{$profile->description}}
                             </textarea>
 
@@ -117,7 +127,7 @@
 
                         </div>
 
-                        <button class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'description-box-', 'input-profile-description-')">
+                        <button style="position: relative;top: 2rem;" class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'description-box-', 'input-profile-description-')">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
 
@@ -125,53 +135,8 @@
                 </div>
 
             </div>
-            <script>
-                function toggleInput(profileId, element, inputElement){
-                    const item = document.getElementById(element+profileId);
-                    const input = document.getElementById(inputElement+profileId);
+            <script src="{{asset('js/edit-profile-fields.js')}}">
 
-                    if(item.hasAttribute('hidden')){
-                        item.removeAttribute('hidden');
-                        input.hidden = true;
-                    } else{
-                        input.removeAttribute('hidden');
-                        item.hidden = true;
-                    }
-                }
-
-                function editName(profileId){
-                    let formData = new FormData();
-                    const name = document.querySelector(`#input-name-${profileId}`).value;
-                    const token = document.querySelector(`input[name="_token"]`).value;
-                    formData.append('name', name);
-                    formData.append('_token', token);
-                    const url = `/profiles/${profileId}/editName`;
-
-                    fetch(url, {
-                        body:formData,
-                        method:'POST'
-                    }).then(()=>{
-                        toggleInput(profileId, 'name-box-', 'input-profile-name-');
-                        document.getElementById(`profile-name-${profileId}`).textContent = name;
-                    })
-                }
-
-                function editDescription(profileId){
-                    let formData = new FormData();
-                    const description = document.querySelector(`#input-description-${profileId}`).value;
-                    const token = document.querySelector(`input[name="_token"]`).value;
-                    formData.append('description', description);
-                    formData.append('_token', token);
-                    const url = `/profiles/${profileId}/editDescription`;
-
-                    fetch(url, {
-                        body:formData,
-                        method: 'POST'
-                    }).then(()=>{
-                        toggleInput(profileId, 'description-box-', 'input-profile-description-');
-                        document.getElementById(`profile-description-${profileId}`).textContent = description;
-                    })
-                }
             </script>
     @endforeach
 </x-layout>

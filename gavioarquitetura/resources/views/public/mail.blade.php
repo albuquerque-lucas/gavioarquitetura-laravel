@@ -2,19 +2,9 @@
 
     <div class="form-section">
         <p>Entre em contato conosco!</p>
-{{--        <?php--}}
-{{--        if(isset($_POST['email']) && !empty($_POST['email'])){--}}
-{{--        if(mail($to,$subject,$body,$header)){ ?>--}}
-{{--        <p class='alert-success form-mensagem-envio'>Mensagem enviada com sucesso!</p>--}}
-
-{{--        <?php--}}
-{{--        } else{ ?>--}}
-{{--        <p class='alert-danger form-mensagem-envio'>A mensagem não pode ser enviada. :(</p>--}}
-{{--        <?php }} ?>--}}
-
 
         @if(!empty($message))
-            <div class="alert alert-success">
+            <div class="alert alert-success w-50 text-center">
                 {{ $message }}
             </div>
         @endif

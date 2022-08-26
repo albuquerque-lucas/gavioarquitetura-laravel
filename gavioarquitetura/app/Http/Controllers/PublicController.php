@@ -26,24 +26,27 @@ class PublicController extends Controller
         $name = $request->name;
         $projects = Project::query()->where('category_id', $id)->orderByDesc('id')->get();
         $categories = Category::query()->orderBy('id')->get();
-        return view('public.projects', compact('projects', 'categories', 'name', 'title'));
+        $message = $request->session()->get('message');
+        return view('public.projects', compact('projects', 'categories', 'name', 'title', 'message'));
     }
 
     public function profile(Request $request)
     {
         $title = "Quem Somos | Gávio Arquitetura";
         $profiles = Profile::all();
+        $message = $request->session()->get('message');
 
-        return view('public.about-us', compact('profiles', 'title'));
+        return view('public.about-us', compact('profiles', 'title', 'message'));
     }
 
-    public function show(int $project_id)
+    public function show(int $project_id, Request $request)
     {
         $project = Project::find($project_id);
         $title = $project->name . ' | Gávio Arquitetura';
         $images = Image::query()->orderBy('id')->where('project_id', $project_id)->get();
+        $message = $request->session()->get('message');
 
-        return view('public.show', compact('project', 'images', 'title'));
+        return view('public.show', compact('project', 'images', 'title', $message));
     }
 
     public function email(Request $request)
