@@ -36,13 +36,35 @@
 
         </div>
 
+        <div class="mb-5 w-25">
+
+            <form action="/admin-projects/{{$project->id}}/editCarousel" method="post">
+                <label for="carrossel" class="fw-bold">Carrossel</label>
+
+                <select name="activate_carousel" id="activate_carousel" class="form-control border-secondary">
+                    <option value="1" @if($project->activate_carousel == 1) selected @endif>Ativado</option>
+                    <option value="0" @if($project->activate_carousel == 0) selected @endif>Desativado</option>
+                </select>
+
+                <div class="input-group-append">
+                    <button class="btn btn-dark" onclick="editName({{$project->id}})">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    @csrf
+                </div>
+
+            </form>
+
+        </div>
+
 
 
 
 
         <div class="d-flex justify-content-center">
             <div class="mb-2 mx-1" id="name-box-{{$project->id}}" style="width: 20rem">
-                <p>Nome: <span id="project-name-{{$project->id}}">{{$project->name}}</span></p>
+                <p class="fw-bold">Nome: </p>
+                <p id="project-name-{{$project->id}}">{{$project->name}}</p>
             </div>
             <div class="input-group" hidden id="project-name-inputbox-{{ $project->id }}">
 
@@ -66,7 +88,8 @@
 
         <div class="d-flex justify-content-center">
             <div class="mb-2 mx-1" id="area-box-{{$project->id}}" style="width: 20rem">
-                <p>Área: <span id="project-area-{{$project->id}}">{{$project->area}}</span></p>
+                <p class="fw-bold">Área: </p>
+                <p id="project-area-{{$project->id}}">{{$project->area}}</p>
             </div>
             <div class="input-group w-100" hidden id="project-area-inputbox-{{ $project->id }}">
                 <input type="text" class="form-control" value="{{ $project->area }}" id="area-input-{{$project->id}}">
@@ -88,7 +111,8 @@
 
         <div class="d-flex justify-content-center">
             <div class="mb-2 mx-1" id="year-box-{{$project->id}}" style="width: 20rem">
-                <p>Data: <span id="project-year-{{$project->id}}">{{$project->year}}</span></p>
+                <p class="fw-bold">Data:</p>
+                <p id="project-year-{{$project->id}}">{{$project->year}}</p>
             </div>
             <div class="input-group w-100" hidden id="project-year-inputbox-{{ $project->id }}">
                 <input type="text" class="form-control" value="{{ $project->year }}" id="year-input-{{$project->id}}">
@@ -106,7 +130,8 @@
 
         <div class="d-flex justify-content-center">
             <div class="mb-2 mx-1" id="address-box-{{$project->id}}" style="width: 20rem">
-                <p>Localização: <span id="project-address-{{$project->id}}">{{$project->address}}</span></p>
+                <p class="fw-bold">Localização: </p>
+                <p id="project-address-{{$project->id}}">{{$project->address}}</p>
             </div>
             <div class="input-group w-100" hidden id="project-address-inputbox-{{ $project->id }}">
                 <input type="text" class="form-control" value="{{ $project->address }}" id="address-input-{{$project->id}}">
@@ -123,8 +148,9 @@
         </div>
 
         <div class="d-flex justify-content-center">
-            <div class="mb-5 bg-light  painel-descricption mx-1" id="description-box-{{$project->id}}" style="width: 20rem">
-                <p>Descrição: <span id="project-description-{{$project->id}}">{{$project->description}}</span></p>
+            <div class="mb-5 painel-descricption w-75" id="description-box-{{$project->id}}" style="width: 20rem">
+                <p class="fw-bold">Descrição: </p>
+                <p id="project-description-{{$project->id}}">{{$project->description}}</p>
             </div>
             <div class="input-group w-100" hidden id="project-description-inputbox-{{ $project->id }}">
                 <textarea class="form-control" id="description-input-{{$project->id}}">{{ $project->description }}</textarea>

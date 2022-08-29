@@ -43,6 +43,7 @@
             <tr>
                 <th scope="col" class="text-center">#</th>
                 <th scope="col" class="text-center">Nome</th>
+                <th scope="col" class="text-center">Carrossel</th>
                 <th scope="col" class="text-center">Area</th>
                 <th scope="col" class="text-center">Ano</th>
                 <th scope="col" class="text-center">Localização</th>
@@ -57,6 +58,7 @@
                     <tr>
                         <th scope="row">{{$project->id}}</th>
                         <td class="text-center">{{$project->name}}</td>
+                        <td class="text-center fw-bold">@if($project->activate_carousel == 1) Ativo @else Desativado @endif</td>
                         <td class="text-center">{{$project->area}}</td>
                         <td class="text-center">{{$project->year}}</td>
                         <td class="text-center">{{$project->address}}</td>

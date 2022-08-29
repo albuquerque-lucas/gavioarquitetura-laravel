@@ -13,7 +13,7 @@
 <body>
 <header>
     @auth()
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2 p-3 w-100">
+    <nav class="navbar navbar-expand-lg navbar-dark mb-2 p-3 w-100">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">

@@ -1,7 +1,7 @@
 <x-layout title="Perfis">
     <style>
         .cards-container{
-            min-height: 100vh;
+            min-height: 150vh;
             width: 100%;
             justify-content: space-around;
         }
@@ -61,7 +61,7 @@
         }
 
     </style>
-    <div class="d-flex cards-container">
+    <div class="d-flex cards-container mb-5">
 
         @foreach($profiles as $profile)
 
@@ -71,7 +71,7 @@
                     <form method="post" enctype="multipart/form-data" action="/admin-projects/{{$profile->id}}/editImage">
                         @csrf
                         <input type="file" class="form-control border-secondary" name="img_path_profile">
-                        <button class="btn btn-primary edit-button">
+                        <button class="btn btn-dark edit-button">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                     </form>
@@ -81,9 +81,10 @@
 
                     <div class="d-flex">
 
-                        <div id="name-box-{{$profile->id}}" class="caixa-edicao" onclick="toggleInput({{$profile->id}}, 'name-box-', 'input-profile-name-')">
+                        <div id="name-box-{{$profile->id}}" onclick="toggleInput({{$profile->id}}, 'name-box-', 'input-profile-name-')">
 
-                            <p><strong>Nome:</strong> <span id="profile-name-{{$profile->id}}">{{$profile->name}}</span> </p>
+                            <p class="fw-bold">Nome:</p>
+                            <p id="profile-name-{{$profile->id}}" class="caixa-edicao">{{$profile->name}}</p>
 
                         </div>
 
@@ -91,7 +92,7 @@
 
                             <input type="text" class="form-control" value="{{$profile->name}}" id="input-name-{{$profile->id}}">
                             <div class="input-group-append">
-                                <button class="btn btn-primary edit-button" onclick="editName({{$profile->id}})">
+                                <button class="btn btn-dark edit-button" onclick="editName({{$profile->id}})">
                                     <i class="fa fa-check"></i>
                                 </button>
                                 @csrf
@@ -99,19 +100,17 @@
 
                         </div>
 
-                        <button class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'name-box-', 'input-profile-name-')">
+                        <button class="btn btn-dark edit-button" onclick="toggleInput({{$profile->id}}, 'name-box-', 'input-profile-name-')">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
 
                     </div>
 
                     <div class="d-flex">
-                        <div id="description-box-{{$profile->id}}" class="descricao-div caixa-edicao" onclick="toggleInput({{$profile->id}}, 'description-box-', 'input-profile-description-')">
+                        <div id="description-box-{{$profile->id}}" class="descricao-div" onclick="toggleInput({{$profile->id}}, 'description-box-', 'input-profile-description-')">
 
-                                <strong>Descrição:</strong>
-                            <p>
-                                <span id="profile-description-{{$profile->id}}">{{$profile->description}}</span>
-                            </p>
+                            <p class="fw-bold">Descrição:</p>
+                            <p id="profile-description-{{$profile->id}}" class="caixa-edicao">{{$profile->description}}</p>
 
                         </div>
 
@@ -121,13 +120,13 @@
                                 {{$profile->description}}
                             </textarea>
 
-                            <button class="btn btn-primary edit-button" onclick="editDescription({{$profile->id}})">
+                            <button class="btn btn-dark edit-button" onclick="editDescription({{$profile->id}})">
                                 <i class="fa fa-check"></i>
                             </button>
 
                         </div>
 
-                        <button style="position: relative;top: 2rem;" class="btn btn-primary edit-button" onclick="toggleInput({{$profile->id}}, 'description-box-', 'input-profile-description-')">
+                        <button style="position: relative;top: 2rem;" class="btn btn-dark edit-button" onclick="toggleInput({{$profile->id}}, 'description-box-', 'input-profile-description-')">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
 

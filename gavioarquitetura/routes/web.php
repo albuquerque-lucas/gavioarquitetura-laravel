@@ -42,7 +42,7 @@ Route::post('/admin-projects', [ProjectController::class, 'store'])->name('admin
 Route::delete('/admin-projects/{id}', [ProjectController::class, 'destroy'])->name('admin_projects.destroy');
 Route::get('/admin-projects/{id}',  [ProjectController::class, 'show'])->name('admin_projects.show');
 
-
+Route::post('/admin-projects/{id}/editCarousel', [ProjectController::class, 'editCarousel'])->name('edit_carousel');
 Route::post('/admin-projects/{id}/editName', [ProjectController::class, 'editName']);
 Route::post('/admin-projects/{id}/editArea', [ProjectController::class, 'editArea']);
 Route::post('/admin-projects/{id}/editYear', [ProjectController::class, 'editYear']);

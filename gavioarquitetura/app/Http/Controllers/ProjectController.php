@@ -58,7 +58,8 @@ class ProjectController extends Controller
             $request->description,
             $image,
             $request->category_id,
-            $request->activate_carousel);
+            $request->activate_carousel
+        );
 
         $request->session()->flash('message', "Projeto $project->name adicionado com sucesso.");
         return redirect('/admin-projects/'.$project->id);
@@ -79,6 +80,15 @@ class ProjectController extends Controller
         $project = Project::find($project_id);
         $images = Image::query()->orderBy('id')->where('project_id', $project_id)->get();
         return view('admin.show', compact('project', 'images'));
+    }
+
+    public function editCarousel(Request $request)
+    {
+        $activeCarousel = $request->activate_carousel;
+        $project = Project::find($request->id);
+        $project->activate_carousel = $activeCarousel;
+        $project->save();
+        return redirect('/admin-projects/'.$project->id);
     }
 
     public function editName(Request $request)
