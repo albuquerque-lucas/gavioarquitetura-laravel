@@ -36,9 +36,27 @@
 
         </div>
 
+        <div class="mb-1 w-25">
+            <form action="{{route('edit_category', $project->id)}}" method="post">
+            <label for="category_id" class="fw-bold">Categoria</label>
+            <select name="category_id" id="category_id" class="form-control border-secondary">
+                @foreach($categories as $category)
+                    <option value="{{$category->id}}" @if($category->name == $project->category->name) selected @endif>{{$category->name}}</option>
+                @endforeach
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-dark">
+                    <i class="fas fa-check"></i>
+                </button>
+                @csrf
+            </div>
+
+            </form>
+        </div>
+
         <div class="mb-5 w-25">
 
-            <form action="/admin-projects/{{$project->id}}/editCarousel" method="post">
+            <form action="{{route('edit_carousel', $project->id)}}" method="post">
                 <label for="carrossel" class="fw-bold">Carrossel</label>
 
                 <select name="activate_carousel" id="activate_carousel" class="form-control border-secondary">
@@ -47,7 +65,7 @@
                 </select>
 
                 <div class="input-group-append">
-                    <button class="btn btn-dark" onclick="editName({{$project->id}})">
+                    <button class="btn btn-dark">
                         <i class="fas fa-check"></i>
                     </button>
                     @csrf
@@ -56,6 +74,8 @@
             </form>
 
         </div>
+
+
 
 
 

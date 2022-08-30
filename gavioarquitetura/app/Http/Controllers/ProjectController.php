@@ -21,11 +21,12 @@ class ProjectController extends Controller
 
     public function index(Request $request)
     {
-        $name = 'Projetos';
-        $projects = Project::query()->orderByDesc('id')->get();
-        $categories = Category::query()->orderBy('id')->get();
-        $message = $request->session()->get('message');
-        return view('admin.index', compact('projects', 'message', 'categories', 'name'));
+        if ($request->id !== null){
+            $project = Project::query()->where('category_id', $request->id)->get();
+        return redirect()->route('projectsByCategory', [$project->category->name, $project->id]);
+        }else{
+            return redirect()->route('projectsByCategory', ['Residencial', '1']);
+        }
 
     }
 
@@ -78,8 +79,18 @@ class ProjectController extends Controller
     public function show(int $project_id)
     {
         $project = Project::find($project_id);
+        $categories = Category::query()->orderBy('id')->get();
         $images = Image::query()->orderBy('id')->where('project_id', $project_id)->get();
-        return view('admin.show', compact('project', 'images'));
+        return view('admin.show', compact('project', 'images', 'categories'));
+    }
+
+    public function editCategory(Request $request)
+    {
+        $newCategory = $request->category_id;
+        $project = Project::find($request->id);
+        $project->category_id = $newCategory;
+        $project->save();
+        return redirect()->route('admin_projects.show', $project->id);
     }
 
     public function editCarousel(Request $request)
