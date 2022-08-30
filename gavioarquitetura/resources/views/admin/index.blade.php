@@ -38,7 +38,7 @@
 
         <a href="{{route('admin_projects.create')}}" class="btn btn-dark mb-2">Adicionar</a>
 
-        <table class="table">
+        <table class="table display" id="project-table">
             <thead>
             <tr>
                 <th scope="col" class="text-center">#</th>
@@ -56,7 +56,7 @@
             @foreach($projects as $project)
                 <div id="project-card">
                     <tr>
-                        <th scope="row">{{$project->id}}</th>
+                        <td class="text-center fw-bold">{{$project->id}}</td>
                         <td class="text-center">{{$project->name}}</td>
                         <td class="text-center fw-bold">@if($project->activate_carousel == 1) Ativo @else Desativado @endif</td>
                         <td class="text-center">{{$project->area}}</td>
@@ -83,4 +83,9 @@
             @endforeach
             </tbody>
         </table>
+        <script>
+            $(document).ready( function () {
+                $('#project-table').DataTable();
+            } );
+        </script>
 </x-layout>
