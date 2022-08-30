@@ -4,12 +4,15 @@ namespace App\Services;
 
 
 use App\Models\Image;
+use App\Models\Profile;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ImageHandler
 {
-    public function upload(Request $request, $file_input, $project, $project_id)
+    public function uploadProjectImages(Request $request, string $file_input, Project $project, int $project_id)
     {
 
         $images = [];
@@ -46,4 +49,14 @@ class ImageHandler
         });
         return $imageName;
     }
+
+    public function uploadProfileImage(Profile $profile, Request $request)
+    {
+        Storage::disk('public')->delete($profile->img_path);
+        $img = $request->file('img_path_profile')->store('users', 'public');
+        $profile->img_path = $img;
+        $profile->save();
+    }
+
+
 }

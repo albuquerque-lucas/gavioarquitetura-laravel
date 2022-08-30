@@ -58,5 +58,5 @@ Route::delete('/images/{id}', [ImageController::class, 'destroy'])->name('images
 Route::get('/profiles', [ProfileController::class, 'index'])->name('profiles.index');
 Route::post('/profiles/{id}/editName', [ProfileController::class, 'editName']);
 Route::post('/profiles/{id}/editDescription', [ProfileController::class, 'editDescription']);
-Route::post('/profiles/{id}/editImage', [ProfileController::class, 'editImage']);
+Route::post('/profiles/{id}/editImage', [ProfileController::class, 'editImage'])->name('profiles.editImage');
 

@@ -1,7 +1,7 @@
 <x-layout title="Perfis">
     <style>
         .cards-container{
-            min-height: 150vh;
+            min-height: 100vh;
             width: 100%;
             justify-content: space-around;
         }
@@ -24,7 +24,7 @@
         }
 
         .content-info{
-            height: 50%;
+            height: 100%;
             display: flex;
             flex-direction: column;
         }
@@ -33,7 +33,8 @@
             border-radius: 5px;
             margin-bottom: 1em;
             margin-right: .1em;
-            width: 20rem;
+            padding: .7rem;
+            width: 30rem;
             box-shadow: inset 0 0 .5em white;
             transition: .1s ease-in-out;
         }
@@ -48,6 +49,11 @@
         .content-info textarea{
             padding: .5em;
             margin-bottom: 1em;
+            width: 30rem!important;
+        }
+
+        .content-info textarea{
+            min-height: 15rem;
         }
 
         .descricao-div{
@@ -60,6 +66,10 @@
             height:2.5em;
         }
 
+        .edit-button:focus{
+            box-shadow: none;
+        }
+
     </style>
     <div class="d-flex cards-container mb-5">
 
@@ -68,7 +78,7 @@
             <div class="profile-card">
                 <div class="profile-img">
                     <img src="{{$profile->img_path_url}}" class="image">
-                    <form method="post" enctype="multipart/form-data" action="/admin-projects/{{$profile->id}}/editImage">
+                    <form method="post" enctype="multipart/form-data" action="{{route('profiles.editImage', $profile->id)}}">
                         @csrf
                         <input type="file" class="form-control border-secondary" name="img_path_profile">
                         <button class="btn btn-dark edit-button">
@@ -100,10 +110,6 @@
 
                         </div>
 
-                        <button class="btn btn-dark edit-button" onclick="toggleInput({{$profile->id}}, 'name-box-', 'input-profile-name-')">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-
                     </div>
 
                     <div class="d-flex">
@@ -120,15 +126,11 @@
                                 {{$profile->description}}
                             </textarea>
 
-                            <button class="btn btn-dark edit-button" onclick="editDescription({{$profile->id}})">
+                            <button class="btn btn-dark edit-button" onclick="editDescription({{$profile->id}})" style="position: relative;top: 2rem">
                                 <i class="fa fa-check"></i>
                             </button>
 
                         </div>
-
-                        <button style="position: relative;top: 2rem;" class="btn btn-dark edit-button" onclick="toggleInput({{$profile->id}}, 'description-box-', 'input-profile-description-')">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
 
                     </div>
                 </div>

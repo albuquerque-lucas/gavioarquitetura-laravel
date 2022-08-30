@@ -13,7 +13,9 @@ class ImageController extends Controller
     {
         $project_id = $request->id;
         $project = Project::find($project_id);
-        $imageUploader->upload($request, 'images', $project, $project_id);
+        $fileInput = 'images';
+
+        $imageUploader->uploadProjectImages($request, $fileInput, $project, $project_id);
 
         return redirect()->back();
     }

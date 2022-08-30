@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Http\Requests\ProjectFormRequest;
 use App\Models\Image;
 use App\Models\Project;
+use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +26,7 @@ class ProjectHandler
         return $project;
     }
 
-    public function uploadCover($request, $input)
+    public function uploadCover(ProjectFormRequest $request, string $input)
     {
         $image = null;
 

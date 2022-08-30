@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\Autenticador;
+use App\Http\Requests\ProjectFormRequest;
 use App\Models\Profile;
+use App\Services\ImageHandler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,7 +17,7 @@ class ProfileController extends Controller
         $this->middleware(Autenticador::class);
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $profiles = Profile::query()->orderBy('id')->get();
         return view('profiles.index', compact('profiles'));
@@ -37,14 +39,10 @@ class ProfileController extends Controller
         $profile->save();
     }
 
-    public function editImage(Request $request)
+    public function editImage(Request $request, ImageHandler $imageHandler)
     {
         $profile = Profile::find($request->id);
-
-        Storage::disk('public')->delete($profile->img_path);
-        $img = $request->file('img_path_profile')->store('users', 'public');
-        $profile->img_path = $img;
-        $profile->save();
+        $imageHandler->uploadProfileImage($profile, $request);
 
         return redirect()->back();
     }
